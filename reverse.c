@@ -10,6 +10,9 @@ struct Node {
     struct Node *next;
 };
 
+// Prototipos de funciones
+void reversePrint(struct Node *head, FILE *outputFile);
+void freeList(struct Node *head);
 
 int main(int argc, char *argv[]) {
     FILE *inputFile = NULL;
@@ -50,7 +53,7 @@ int main(int argc, char *argv[]) {
         outputFile = fopen(argv[2], "w");
         if (outputFile == NULL) {
             fprintf(stderr, "error: cannot open file '%s'\n", argv[2]);
-            freeList(head); // Liberar la memoria de la lista enlazada antes de salir
+            // Liberar la memoria de la lista enlazada antes de salir
             exit(1);
         }
 
@@ -92,8 +95,29 @@ int main(int argc, char *argv[]) {
         fclose(inputFile);
     }
 
+    // Imprimir la lista en orden inverso en el archivo de salida
+    reversePrint(head, outputFile);
+
     // Cerrar el archivo de salida si no es la salida estándar
     if (outputFile != stdout) {
         fclose(outputFile);
     }
+
+    // TODO: Liberar la memoria de la lista enlazada
+
+    // Liberar memoria de la línea
+    if (line) {
+        free(line);
+    }
+
+    return 0;
+}
+
+// Función para imprimir la lista en orden inverso
+void reversePrint(struct Node *head, FILE *outputFile) {
+    if (head == NULL) {
+        return;
+    }
+    reversePrint(head->next, outputFile);
+    fprintf(outputFile, "%s", head->line);
 }
