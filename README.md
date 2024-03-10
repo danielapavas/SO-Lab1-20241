@@ -1,6 +1,10 @@
 
 # Práctica 1 de laboratorio - Introducción al lenguaje C
 
+## Miembros del grupo
+* DANIELA ANDREA PAVAS BEDOYA, CC 1192741700, Ingeniería de Sistemas
+* GIOVANI CARDONA MARÍN, CC 1035913434, Ingeniería de Sistemas
+
 > ## Objetivos
 > * Aprender a codificar programas usando el lenguaje C a nivel básico e intermedio.
 > * Aprender a usar las herramientas básicas para desarrollar aplicaciones en un ambiente de desarrollo linux.
