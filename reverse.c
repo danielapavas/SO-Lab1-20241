@@ -53,7 +53,7 @@ int main(int argc, char *argv[]) {
         outputFile = fopen(argv[2], "w");
         if (outputFile == NULL) {
             fprintf(stderr, "error: cannot open file '%s'\n", argv[2]);
-            // Liberar la memoria de la lista enlazada antes de salir
+            freeList(head); // Liberar la memoria de la lista enlazada antes de salir
             exit(1);
         }
 
@@ -103,7 +103,8 @@ int main(int argc, char *argv[]) {
         fclose(outputFile);
     }
 
-    // TODO: Liberar la memoria de la lista enlazada
+    // Liberar la memoria de la lista enlazada
+    freeList(head);
 
     // Liberar memoria de la línea
     if (line) {
@@ -120,4 +121,15 @@ void reversePrint(struct Node *head, FILE *outputFile) {
     }
     reversePrint(head->next, outputFile);
     fprintf(outputFile, "%s", head->line);
+}
+
+// Función para liberar la memoria de la lista enlazada
+void freeList(struct Node *head) {
+    struct Node *temp;
+    while (head != NULL) {
+        temp = head;
+        head = head->next;
+        free(temp->line); // Liberar la memoria de la línea
+        free(temp); // Liberar la memoria del nodo
+    }
 }
